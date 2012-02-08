@@ -13,11 +13,7 @@ public class ClasseTest {
 
 	@Before
 	public void setUp() {
-		String entrada = "4\n" + 
-						 "cardonha 9\n" + 
-						 "infelizreprovado 3\n" +
-						 "marcel 9\n" + 
-						 "infelizaprovado 3";
+		String entrada = "4\n" + "cardonha 9\n" + "infelizreprovado 3\n" + "marcel 9\n" + "infelizaprovado 3";
 
 		classe = new Classe(entrada);
 	}
@@ -26,7 +22,7 @@ public class ClasseTest {
 	public void aPrimeiraLinhaDeCadaInstanciaDeveSerUmInteiroEntreUmECem() {
 		assertTrue(classe.temEntreUmECemAlunos());
 	}
-	
+
 	@Test
 	public void asDemaisLinhasDevemConterONomeDoAlunoEONumeroDeProblemaQueResolveu() {
 		Aluno cardonha = new Aluno("cardonha", 9);
@@ -40,13 +36,14 @@ public class ClasseTest {
 		alunos.add(maciel);
 		alunos.add(infelizaprovado);
 
+		classe.setAlunos(alunos);
+		
 		assertArrayEquals(alunos, classe.getAlunos());
 	}
 
-	private void assertArrayEquals(List<Aluno> alunosEsperados,
-			List<Aluno> alunos) {
+	private void assertArrayEquals(List<Aluno> alunosEsperados, List<Aluno> alunos) {
 		for (int i = 0; i < alunosEsperados.size(); i++) {
-			assertTrue(alunosEsperados.get(i).equals(classe.getAlunos().get(i)));			
+			assertTrue(alunosEsperados.get(i).equals(classe.getAlunos().get(i)));
 		}
 	}
 }
