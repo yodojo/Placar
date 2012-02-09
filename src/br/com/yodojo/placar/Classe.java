@@ -1,32 +1,30 @@
 package br.com.yodojo.placar;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Classe {
 
-	private List<Aluno> alunos;
+	private Set<Aluno> alunos;
 
 	private int quantidadeDeAlunos;
 
-	public Classe(String entrada) {
-		leEntrada(entrada);
-	}
-
-	private void leEntrada(String entrada) {
-		String[] linhas = entrada.split("\n");
-		quantidadeDeAlunos = Integer.parseInt(linhas[0]);
+	public Classe(int quantidadeDeAlunos, Set<Aluno> alunos) {
+		this.quantidadeDeAlunos = quantidadeDeAlunos;
+		this.alunos = alunos;
 	}
 
 	public boolean temEntreUmECemAlunos() {
 		return (quantidadeDeAlunos >= 1 && quantidadeDeAlunos <= 100);
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
+	public String getNomeDoAlunoReprovado() {
+		return new TreeSet<Aluno>(alunos).first().getNome();
 	}
 
-	public List<Aluno> getAlunos() {
-		return alunos;
+	public Set<Aluno> getAlunos() {
+		return Collections.unmodifiableSet(alunos);
 	}
 
 }

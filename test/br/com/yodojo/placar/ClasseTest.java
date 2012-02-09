@@ -1,9 +1,11 @@
 package br.com.yodojo.placar;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,37 +15,38 @@ public class ClasseTest {
 
 	@Before
 	public void setUp() {
-		String entrada = "4\n" + "cardonha 9\n" + "infelizreprovado 3\n" + "marcel 9\n" + "infelizaprovado 3";
+		int quantidadeDeAlunosDaInstancia = 4;
 
-		classe = new Classe(entrada);
+		classe = new Classe(quantidadeDeAlunosDaInstancia, alunosDaInstancia());
 	}
 
-	@Test
-	public void aPrimeiraLinhaDeCadaInstanciaDeveSerUmInteiroEntreUmECem() {
-		assertTrue(classe.temEntreUmECemAlunos());
-	}
-
-	@Test
-	public void asDemaisLinhasDevemConterONomeDoAlunoEONumeroDeProblemaQueResolveu() {
+	private Set<Aluno> alunosDaInstancia() {
 		Aluno cardonha = new Aluno("cardonha", 9);
 		Aluno infelizreprovado = new Aluno("infelizreprovado", 3);
 		Aluno maciel = new Aluno("marcel", 9);
 		Aluno infelizaprovado = new Aluno("infelizaprovado", 3);
 
-		List<Aluno> alunos = new ArrayList<Aluno>();
-		alunos.add(cardonha);
+		Set<Aluno> alunos = new HashSet<Aluno>();
+
+		alunos.add(infelizaprovado);
 		alunos.add(infelizreprovado);
 		alunos.add(maciel);
-		alunos.add(infelizaprovado);
-
-		classe.setAlunos(alunos);
-		
-		assertArrayEquals(alunos, classe.getAlunos());
+		alunos.add(cardonha);
+		return alunos;
 	}
 
-	private void assertArrayEquals(List<Aluno> alunosEsperados, List<Aluno> alunos) {
-		for (int i = 0; i < alunosEsperados.size(); i++) {
-			assertTrue(alunosEsperados.get(i).equals(classe.getAlunos().get(i)));
-		}
+	@Test
+	public void cadaClasseDeveConterEntreUmECemAlunos() {
+		assertTrue(classe.temEntreUmECemAlunos());
+	}
+
+	@Test
+	public void aPrimeiraInstanciaDeveConterQuatroAlunos() {
+		assertEquals(4, classe.getAlunos().size());
+	}
+
+	@Test
+	public void aSaidaDeveSerIgualAInfelizreprovado() {
+		assertEquals("infelizreprovado", classe.getNomeDoAlunoReprovado());
 	}
 }
