@@ -55,5 +55,4 @@ public class ParserTest {
 			assertTrue(alunosEsperados.contains(aluno));
 		}
 	}
-
 }
